@@ -1,45 +1,56 @@
-import os #habilitar herramientas
-import csv #importar módulo de CSV
+import os
+import csv 
 
-csvpath = os.path.join("Resources","election_data.csv")
+csvpath = os.path.join("Resources","PyPoll_election_data.csv")
+
 
 with open(csvpath) as csvfile:
 
     csvreader = csv.reader(csvfile, delimiter =",")
-
-    next(csvreader)
-
-    Total = len(list(csvreader))
+    print(next(csvreader))
 
     TotalK = 0
     TotalC = 0
     TotalL = 0
-    TotalT = 0
-
-    ElectionList = []
+    TotalO = 0
+    
     for row in csvreader:
-        ElectionList.append(str(row[2]))
-        if ElectionList == "Khan":
-            TotalK +=1
-        elif ElectionList == "Correy":
-            TotalC +=1    
-        elif ElectionList == "Lee":
-            TotalK +=1
-        elif ElectionList == "Tooley":
-            TotalT +=1 
+        ElectionList =str(row[2])
+        if ElectionList=="Khan":
+             TotalK +=1
+        elif ElectionList=="Correy":
+             TotalC +=1    
+        elif ElectionList=="Li":
+             TotalL +=1
+        elif ElectionList=="O'Tooley":
+             TotalO +=1
 
-            print("Election Results")
-            print("----------------")
-            print(f"Total Votes:    {Total}")
-            print("----------------")
-            print(f"Total Votes Khan: {TotalK}" + "(%)")
-            print(f"Total Votes Khan: {TotalC}" + "(%)")
-            print(f"Total Votes Khan: {TotalL}" + "(%)")
-            print(f"Total Votes Khan: {TotalT}" + "(%)")
-            print("----------------")
+        TotalVotes = TotalK + TotalC + TotalL + TotalO
 
-
+        PercentVotesK=TotalK / TotalVotes
+        PercentVotesC=TotalC / TotalVotes
+        PercentVotesL=TotalL / TotalVotes
+        PercentVotesO=TotalO / TotalVotes
+       
+    print("Election Results")
+    print("----------------")
+    print(f"Total Votes: {TotalVotes}")
+    print("----------------")
+    print(f"Total Votes Khan: {PercentVotesK:{1}.{4}}" + "%" + " " + "(" + str(TotalK)+ ")")
+    print(f"Total Votes Correy: {PercentVotesC:{1}.{4}}"  + "%"+ " " + "(" + str(TotalC)+ ")")
+    print(f"Total Votes Li: {PercentVotesL:{1}.{4}}" + "%"+ " " + "(" + str(TotalL)+ ")")
+    print(f"Total Votes O'Toley: {PercentVotesO:{1}.{4}}"  + "%"+ " " + "(" + str(TotalO)+ ")")
+    print("----------------")
+    Winner = [TotalK, TotalC, TotalL, TotalO]
    
+if TotalK == max(Winner):
+     print("Winner: Khan")
+elif TotalC == max(Winner):
+     print ("Winner: Cole")
+elif TotalL == max(Winner):
+     print ("Winner Li")
+elif TotalO== max(Winner):
+     print ("Winner O´Toole")
+               
 
-
-   
+    
